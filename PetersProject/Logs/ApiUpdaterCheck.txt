@@ -758,3 +758,213 @@ C# parse time         : 437ms
 candidates check time : 52ms
 console write time    : 2ms
 
+[api-updater (non-obsolete-error-filter)] 2022/11/01 17:54:57 : Starting /Users/hiroto/UnityWorks/2020.3.34f1/Unity.app/Contents/Tools/ScriptUpdater/APIUpdater.NonObsoleteApiUpdaterDetector.exe
+[api-updater (non-obsolete-error-filter)] 
+----------------------------------
+jit/startup time      : 518.058ms
+moved types parse time: 81ms
+candidates parse time : 1ms
+C# parse time         : 400ms
+candidates check time : 57ms
+console write time    : 0ms
+
+[api-updater (non-obsolete-error-filter)] 2022/11/01 17:55:45 : Starting /Users/hiroto/UnityWorks/2020.3.34f1/Unity.app/Contents/Tools/ScriptUpdater/APIUpdater.NonObsoleteApiUpdaterDetector.exe
+[api-updater (non-obsolete-error-filter)] 
+----------------------------------
+jit/startup time      : 208.673ms
+moved types parse time: 127ms
+candidates parse time : 2ms
+C# parse time         : 336ms
+candidates check time : 48ms
+console write time    : 1ms
+
+[api-updater (non-obsolete-error-filter)] 2022/11/01 17:55:52 : Starting /Users/hiroto/UnityWorks/2020.3.34f1/Unity.app/Contents/Tools/ScriptUpdater/APIUpdater.NonObsoleteApiUpdaterDetector.exe
+[api-updater (non-obsolete-error-filter)] 
+----------------------------------
+jit/startup time      : 75.902ms
+moved types parse time: 60ms
+candidates parse time : 1ms
+C# parse time         : 546ms
+candidates check time : 73ms
+console write time    : 1ms
+
+[api-updater (non-obsolete-error-filter)] 2022/11/01 17:56:05 : Starting /Users/hiroto/UnityWorks/2020.3.34f1/Unity.app/Contents/Tools/ScriptUpdater/APIUpdater.NonObsoleteApiUpdaterDetector.exe
+[api-updater (non-obsolete-error-filter)] 
+----------------------------------
+jit/startup time      : 207.98ms
+moved types parse time: 120ms
+candidates parse time : 3ms
+C# parse time         : 350ms
+candidates check time : 47ms
+console write time    : 1ms
+
+[api-updater (non-obsolete-error-filter)] 2022/11/01 17:56:18 : Starting /Users/hiroto/UnityWorks/2020.3.34f1/Unity.app/Contents/Tools/ScriptUpdater/APIUpdater.NonObsoleteApiUpdaterDetector.exe
+[api-updater (non-obsolete-error-filter)] 
+----------------------------------
+jit/startup time      : 190.864ms
+moved types parse time: 74ms
+candidates parse time : 1ms
+C# parse time         : 360ms
+candidates check time : 48ms
+console write time    : 1ms
+
+[api-updater (non-obsolete-error-filter)] 2022/11/01 18:18:40 : Starting /Users/hiroto/UnityWorks/2020.3.34f1/Unity.app/Contents/Tools/ScriptUpdater/APIUpdater.NonObsoleteApiUpdaterDetector.exe
+[api-updater (non-obsolete-error-filter)] 
+----------------------------------
+jit/startup time      : 186.46ms
+moved types parse time: 156ms
+candidates parse time : 2ms
+C# parse time         : 450ms
+candidates check time : 63ms
+console write time    : 1ms
+
+[api-updater (non-obsolete-error-filter)] 2022/11/01 18:19:14 : Starting /Users/hiroto/UnityWorks/2020.3.34f1/Unity.app/Contents/Tools/ScriptUpdater/APIUpdater.NonObsoleteApiUpdaterDetector.exe
+[api-updater (non-obsolete-error-filter)] 
+----------------------------------
+jit/startup time      : 219.89ms
+moved types parse time: 128ms
+candidates parse time : 1ms
+C# parse time         : 397ms
+candidates check time : 55ms
+console write time    : 2ms
+
+[api-updater (non-obsolete-error-filter)] 2022/11/01 18:25:27 : Starting /Users/hiroto/UnityWorks/2020.3.34f1/Unity.app/Contents/Tools/ScriptUpdater/APIUpdater.NonObsoleteApiUpdaterDetector.exe
+[api-updater (non-obsolete-error-filter)] 
+----------------------------------
+jit/startup time      : 174.335ms
+moved types parse time: 172ms
+candidates parse time : 3ms
+C# parse time         : 587ms
+candidates check time : 98ms
+console write time    : 2ms
+
+[api-updater (non-obsolete-error-filter)] 2022/11/01 18:25:38 : Starting /Users/hiroto/UnityWorks/2020.3.34f1/Unity.app/Contents/Tools/ScriptUpdater/APIUpdater.NonObsoleteApiUpdaterDetector.exe
+[api-updater (non-obsolete-error-filter)] 
+----------------------------------
+jit/startup time      : 79.183ms
+moved types parse time: 64ms
+candidates parse time : 1ms
+C# parse time         : 571ms
+candidates check time : 68ms
+console write time    : 0ms
+
+[api-updater (non-obsolete-error-filter)] 2022/11/01 18:25:47 : Starting /Users/hiroto/UnityWorks/2020.3.34f1/Unity.app/Contents/Tools/ScriptUpdater/APIUpdater.NonObsoleteApiUpdaterDetector.exe
+[api-updater (non-obsolete-error-filter)] 
+----------------------------------
+jit/startup time      : 76.259ms
+moved types parse time: 57ms
+candidates parse time : 1ms
+C# parse time         : 397ms
+candidates check time : 67ms
+console write time    : 0ms
+
+[api-updater (non-obsolete-error-filter)] 2022/11/01 18:26:08 : Starting /Users/hiroto/UnityWorks/2020.3.34f1/Unity.app/Contents/Tools/ScriptUpdater/APIUpdater.NonObsoleteApiUpdaterDetector.exe
+[api-updater (non-obsolete-error-filter)] 
+----------------------------------
+jit/startup time      : 217.994ms
+moved types parse time: 108ms
+candidates parse time : 2ms
+C# parse time         : 408ms
+candidates check time : 77ms
+console write time    : 1ms
+
+[api-updater (non-obsolete-error-filter)] 2022/11/01 18:26:12 : Starting /Users/hiroto/UnityWorks/2020.3.34f1/Unity.app/Contents/Tools/ScriptUpdater/APIUpdater.NonObsoleteApiUpdaterDetector.exe
+[api-updater (non-obsolete-error-filter)] 
+----------------------------------
+jit/startup time      : 65.236ms
+moved types parse time: 61ms
+candidates parse time : 1ms
+C# parse time         : 341ms
+candidates check time : 55ms
+console write time    : 0ms
+
+[api-updater (non-obsolete-error-filter)] 2022/11/01 18:26:43 : Starting /Users/hiroto/UnityWorks/2020.3.34f1/Unity.app/Contents/Tools/ScriptUpdater/APIUpdater.NonObsoleteApiUpdaterDetector.exe
+[api-updater (non-obsolete-error-filter)] 
+----------------------------------
+jit/startup time      : 188.721ms
+moved types parse time: 109ms
+candidates parse time : 2ms
+C# parse time         : 466ms
+candidates check time : 57ms
+console write time    : 1ms
+
+[api-updater (non-obsolete-error-filter)] 2022/11/01 18:27:25 : Starting /Users/hiroto/UnityWorks/2020.3.34f1/Unity.app/Contents/Tools/ScriptUpdater/APIUpdater.NonObsoleteApiUpdaterDetector.exe
+[api-updater (non-obsolete-error-filter)] 
+----------------------------------
+jit/startup time      : 206.97ms
+moved types parse time: 154ms
+candidates parse time : 4ms
+C# parse time         : 346ms
+candidates check time : 70ms
+console write time    : 1ms
+
+[api-updater (non-obsolete-error-filter)] 2022/11/01 18:27:54 : Starting /Users/hiroto/UnityWorks/2020.3.34f1/Unity.app/Contents/Tools/ScriptUpdater/APIUpdater.NonObsoleteApiUpdaterDetector.exe
+[api-updater (non-obsolete-error-filter)] 
+----------------------------------
+jit/startup time      : 80.604ms
+moved types parse time: 65ms
+candidates parse time : 1ms
+C# parse time         : 611ms
+candidates check time : 63ms
+console write time    : 0ms
+
+[api-updater (non-obsolete-error-filter)] 2022/11/01 19:19:19 : Starting /Users/hiroto/UnityWorks/2020.3.34f1/Unity.app/Contents/Tools/ScriptUpdater/APIUpdater.NonObsoleteApiUpdaterDetector.exe
+[api-updater (non-obsolete-error-filter)] 
+----------------------------------
+jit/startup time      : 201.526ms
+moved types parse time: 104ms
+candidates parse time : 3ms
+C# parse time         : 426ms
+candidates check time : 56ms
+console write time    : 1ms
+
+[api-updater (non-obsolete-error-filter)] 2022/11/01 19:19:21 : Starting /Users/hiroto/UnityWorks/2020.3.34f1/Unity.app/Contents/Tools/ScriptUpdater/APIUpdater.NonObsoleteApiUpdaterDetector.exe
+[api-updater (non-obsolete-error-filter)] 
+----------------------------------
+jit/startup time      : 71.557ms
+moved types parse time: 59ms
+candidates parse time : 1ms
+C# parse time         : 355ms
+candidates check time : 55ms
+console write time    : 0ms
+
+[api-updater (non-obsolete-error-filter)] 2022/11/01 19:19:31 : Starting /Users/hiroto/UnityWorks/2020.3.34f1/Unity.app/Contents/Tools/ScriptUpdater/APIUpdater.NonObsoleteApiUpdaterDetector.exe
+[api-updater (non-obsolete-error-filter)] 
+----------------------------------
+jit/startup time      : 83.078ms
+moved types parse time: 68ms
+candidates parse time : 2ms
+C# parse time         : 355ms
+candidates check time : 49ms
+console write time    : 0ms
+
+[api-updater (non-obsolete-error-filter)] 2022/11/01 19:19:36 : Starting /Users/hiroto/UnityWorks/2020.3.34f1/Unity.app/Contents/Tools/ScriptUpdater/APIUpdater.NonObsoleteApiUpdaterDetector.exe
+[api-updater (non-obsolete-error-filter)] 
+----------------------------------
+jit/startup time      : 114.718ms
+moved types parse time: 74ms
+candidates parse time : 2ms
+C# parse time         : 354ms
+candidates check time : 57ms
+console write time    : 1ms
+
+[api-updater (non-obsolete-error-filter)] 2022/11/01 19:19:56 : Starting /Users/hiroto/UnityWorks/2020.3.34f1/Unity.app/Contents/Tools/ScriptUpdater/APIUpdater.NonObsoleteApiUpdaterDetector.exe
+[api-updater (non-obsolete-error-filter)] 
+----------------------------------
+jit/startup time      : 198.144ms
+moved types parse time: 281ms
+candidates parse time : 15ms
+C# parse time         : 571ms
+candidates check time : 86ms
+console write time    : 1ms
+
+[api-updater (non-obsolete-error-filter)] 2022/11/01 21:37:34 : Starting /Users/hiroto/UnityWorks/2020.3.34f1/Unity.app/Contents/Tools/ScriptUpdater/APIUpdater.NonObsoleteApiUpdaterDetector.exe
+[api-updater (non-obsolete-error-filter)] 
+----------------------------------
+jit/startup time      : 196.813ms
+moved types parse time: 211ms
+candidates parse time : 2ms
+C# parse time         : 375ms
+candidates check time : 55ms
+console write time    : 1ms
+

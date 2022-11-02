@@ -24,8 +24,10 @@ public class YushaController : CharaController
     }
 
     // Update is called once per frame
-    void Update()
+    protected void Update()
     {
+        //base.Update();
+
         if (Input.GetKeyDown(KeyCode.D))
         {
             keys.Add(Key.RIGHT);
@@ -63,7 +65,11 @@ public class YushaController : CharaController
         if (!isMoving)
         {
             if (keys.Count == 0)
+            {
+                //キーを削除
+                keys.Clear();
                 return;
+            }
 
             //最後に押しているキーを見て移動
             var direction = directions[(int)keys[keys.Count - 1]];
@@ -91,16 +97,15 @@ public class YushaController : CharaController
             yield return null;
         }
 
-        transform.position = targetPos;
         isMoving = false;
     }
 
-    private void OnDrawGizmos()
-    {
-        if (boxCollider2D)
-        {
-            Gizmos.color = Color.blue;
-            Gizmos.DrawSphere(targetPos, moveDistance / 4.0f);
-        }
-    }
+    //private void OnDrawGizmos()
+    //{
+    //    if (boxCollider2D)
+    //    {
+    //        Gizmos.color = Color.blue;
+    //        Gizmos.DrawSphere(targetPos, moveDistance / 4.0f);
+    //    }
+    //}
 }

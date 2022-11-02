@@ -13,6 +13,10 @@ public abstract class CharaController : MonoBehaviour
     protected BoxCollider2D boxCollider2D = null;
     [SerializeField] private Tilemap tilemap;
 
+    //private Vector2 beforePos;
+    //[HideInInspector] public Vector2 nowPos;
+    //[HideInInspector] public Vector2 deltaPos;
+
     public enum Key
     {
         RIGHT,
@@ -30,7 +34,20 @@ public abstract class CharaController : MonoBehaviour
         var complementPos = new Vector3(tilemap.cellSize.x / 2.0f, tilemap.cellSize.y / 2.0f, 0);
 
         transform.position = tilemap.CellToWorld(cellPos) + complementPos;
+
+        ////現在の位置を記憶
+        //nowPos = transform.position;
+        //beforePos = nowPos;
     }
+
+    //protected virtual void Update()
+    //{
+    //    //現在の位置を記憶
+    //    nowPos = transform.position;
+    //    deltaPos = (Vector2)transform.position - beforePos;
+    //    //前回のを今のに
+    //    beforePos = nowPos;
+    //}
 
     //目的地まで歩けるか
     protected bool CanWalk(Vector2 targetPos)
