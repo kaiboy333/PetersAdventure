@@ -9,13 +9,12 @@ public abstract class CharaController : MonoBehaviour
     protected Key key;
     protected readonly Vector2[] directions = { Vector2.right, Vector2.left, Vector2.up, Vector2.down };
     public float moveDistance;
-    [SerializeField] private LayerMask mask;
+    [SerializeField] private LayerMask hitMask;
+    [SerializeField] private LayerMask cellMask;
     protected BoxCollider2D boxCollider2D = null;
     [SerializeField] private Tilemap tilemap;
 
-    //private Vector2 beforePos;
-    //[HideInInspector] public Vector2 nowPos;
-    //[HideInInspector] public Vector2 deltaPos;
+    [HideInInspector] public bool canMove = true;
 
     public enum Key
     {
@@ -29,30 +28,18 @@ public abstract class CharaController : MonoBehaviour
     {
         moveDistance = tilemap.cellSize.x;
 
+        //タイルマップによる位置調整
         var cellPos = tilemap.WorldToCell(transform.position);
 
         var complementPos = new Vector3(tilemap.cellSize.x / 2.0f, tilemap.cellSize.y / 2.0f, 0);
 
         transform.position = tilemap.CellToWorld(cellPos) + complementPos;
-
-        ////現在の位置を記憶
-        //nowPos = transform.position;
-        //beforePos = nowPos;
     }
-
-    //protected virtual void Update()
-    //{
-    //    //現在の位置を記憶
-    //    nowPos = transform.position;
-    //    deltaPos = (Vector2)transform.position - beforePos;
-    //    //前回のを今のに
-    //    beforePos = nowPos;
-    //}
 
     //目的地まで歩けるか
     protected bool CanWalk(Vector2 targetPos)
     {
-        var hitColliders = Physics2D.OverlapCircleAll(targetPos, moveDistance / 4.0f, mask);
+        var hitColliders = Physics2D.OverlapCircleAll(targetPos, moveDistance / 4.0f, hitMask);
 
         foreach(var hitCollider in hitColliders)
         {
@@ -65,5 +52,23 @@ public abstract class CharaController : MonoBehaviour
         }
 
         return true;
+    }
+
+    protected CellEvent GetCellEvent(Vector2 targetPos)
+    {
+        var hitColliders = Physics2D.OverlapCircleAll(targetPos, moveDistance / 4.0f, cellMask);
+
+        foreach (var hitCollider in hitColliders)
+        {
+            //当たったコライダーが自分のとは違うものなら
+            if (hitCollider.gameObject != this.gameObject)
+            {
+                //CellEventを取得
+                var cellEvent = hitCollider.gameObject.GetComponent<CellEvent>();
+                return cellEvent;
+            }
+        }
+
+        return null;
     }
 }

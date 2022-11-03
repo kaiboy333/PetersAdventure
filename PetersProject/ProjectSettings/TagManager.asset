@@ -8,13 +8,13 @@ TagManager:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - Wall
+  - Player
   - Water
   - UI
-  - SolidObject
-  - 
-  - 
-  - 
+  - CellEvent
+  - Wall
+  - Ground
+  - Sea
   - 
   - 
   - 
@@ -46,4 +46,7 @@ TagManager:
     locked: 0
   - name: Chara
     uniqueID: 3251979329
+    locked: 0
+  - name: Panel
+    uniqueID: 2653631207
     locked: 0

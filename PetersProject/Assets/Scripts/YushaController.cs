@@ -62,12 +62,23 @@ public class YushaController : CharaController
             keys.Remove(Key.DOWN);
         }
 
+        //動けないなら終わり
+        if (!canMove)
+            return;
+
+        //動いていないなら
         if (!isMoving)
         {
+            //どのキーも押していないなら
+            if (!Input.GetKey(KeyCode.W) && !Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.S) && !Input.GetKey(KeyCode.D))
+            {
+                //クリア
+                keys.Clear();
+            }
+            //キーがないなら
             if (keys.Count == 0)
             {
-                //キーを削除
-                keys.Clear();
+                //終わり
                 return;
             }
 
@@ -77,35 +88,79 @@ public class YushaController : CharaController
             //歩けるなら
             if (CanWalk(targetPos))
             {
-                StartCoroutine(MoveToward(targetPos));
+                //trueに
+                isMoving = true;
             }
 
             //アニメーション再生
             animator.SetFloat("MoveX", direction.x);
             animator.SetFloat("MoveY", direction.y);
         }
-    }
-
-    IEnumerator MoveToward(Vector2 targetPos)
-    {
-        isMoving = true;
-
-        //距離があるなら
-        while (Vector2.Distance(targetPos, transform.position) > Mathf.Epsilon)
+        //動いているなら
+        else
         {
-            transform.position = Vector3.MoveTowards(transform.position, targetPos, speed * Time.deltaTime);
-            yield return null;
-        }
+            //距離があるなら
+            if (Vector2.Distance(targetPos, transform.position) > Mathf.Epsilon)
+            {
+                //移動
+                transform.position = Vector3.MoveTowards(transform.position, targetPos, speed * Time.deltaTime);
+            }
+            //たどり着いたら
+            else
+            {
+                //false
+                isMoving = false;
 
-        isMoving = false;
+                //CellEventを取得
+                var cellEvent = GetCellEvent(targetPos);
+                //CellEventがあるなら
+                if (cellEvent)
+                {
+                    //CellEventのタイプが乗るタイプなら
+                    if (cellEvent.cellType == CellEvent.CellType.ON)
+                    {
+                        //イベントを呼ぶ
+                        cellEvent.CallEvent();
+                    }
+                }
+            }
+        }
     }
 
-    //private void OnDrawGizmos()
+    //IEnumerator MoveToward(Vector2 targetPos)
     //{
-    //    if (boxCollider2D)
+    //    isMoving = true;
+
+    //    //距離があるなら
+    //    while (Vector2.Distance(targetPos, transform.position) > Mathf.Epsilon)
     //    {
-    //        Gizmos.color = Color.blue;
-    //        Gizmos.DrawSphere(targetPos, moveDistance / 4.0f);
+    //        transform.position = Vector3.MoveTowards(transform.position, targetPos, speed * Time.deltaTime);
+    //        yield return null;
+    //    }
+
+    //    //たどり着いたらfalse
+    //    isMoving = false;
+
+    //    //CellEventを取得
+    //    var cellEvent = GetCellEvent(targetPos);
+    //    //CellEventがあるなら
+    //    if (cellEvent)
+    //    {
+    //        //CellEventのタイプが乗るタイプなら
+    //        if(cellEvent.cellType == CellEvent.CellType.ON)
+    //        {
+    //            //イベントを呼ぶ
+    //            cellEvent.CallEvent();
+    //        }
     //    }
     //}
+
+    private void OnDrawGizmos()
+    {
+        if (boxCollider2D)
+        {
+            Gizmos.color = Color.blue;
+            Gizmos.DrawSphere(targetPos, moveDistance / 4.0f);
+        }
+    }
 }
