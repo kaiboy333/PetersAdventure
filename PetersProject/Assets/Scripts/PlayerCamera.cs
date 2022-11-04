@@ -10,20 +10,14 @@ public class PlayerCamera : MonoBehaviour
 
     public float outViewLine = 0.25f;
 
-
-    private void Awake()
+    // Start is called before the first frame update
+    void Start()
     {
         if (charaController)
         {
             targetObj = charaController.gameObject;
             beforeTargetPos = targetObj.transform.position;
         }
-
-    }
-    // Start is called before the first frame update
-    void Start()
-    {
-
     }
 
     void LateUpdate()

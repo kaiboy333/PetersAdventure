@@ -5,14 +5,14 @@ using UnityEngine.Tilemaps;
 
 public abstract class CharaController : MonoBehaviour
 {
-    public float speed = 2.5f;
+    [SerializeField] protected float speed = 1f;
     protected Key key;
     protected readonly Vector2[] directions = { Vector2.right, Vector2.left, Vector2.up, Vector2.down };
-    public float moveDistance;
+    protected float moveDistance;
     [SerializeField] private LayerMask hitMask;
     [SerializeField] private LayerMask cellMask;
     protected BoxCollider2D boxCollider2D = null;
-    [SerializeField] private Tilemap tilemap;
+    private Tilemap tilemap = null;
 
     [HideInInspector] public bool canMove = true;
 
@@ -26,14 +26,22 @@ public abstract class CharaController : MonoBehaviour
 
     protected virtual void Start()
     {
-        moveDistance = tilemap.cellSize.x;
+        hitMask = LayerMask.GetMask("Sea", "Player", "Wall");
+        cellMask = LayerMask.GetMask("CellEvent");
 
         //タイルマップによる位置調整
-        var cellPos = tilemap.WorldToCell(transform.position);
+        tilemap = FindObjectOfType<Tilemap>();
 
-        var complementPos = new Vector3(tilemap.cellSize.x / 2.0f, tilemap.cellSize.y / 2.0f, 0);
+        if (tilemap)
+        {
+            moveDistance = tilemap.cellSize.x;
 
-        transform.position = tilemap.CellToWorld(cellPos) + complementPos;
+            var cellPos = tilemap.WorldToCell(transform.position);
+
+            var complementPos = new Vector3(tilemap.cellSize.x / 2.0f, tilemap.cellSize.y / 2.0f, 0);
+
+            transform.position = tilemap.CellToWorld(cellPos) + complementPos;
+        }
     }
 
     //目的地まで歩けるか

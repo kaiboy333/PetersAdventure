@@ -5,8 +5,8 @@ using UnityEngine.Tilemaps;
 
 public abstract class CellEvent : MonoBehaviour
 {
-    [SerializeField] private Tilemap tilemap = null;
-    [SerializeField] protected EventTaskManager eventTaskManager = null;
+    private Tilemap tilemap = null;
+    protected EventTaskManager eventTaskManager = null;
 
     public enum CellType
     {
@@ -15,14 +15,21 @@ public abstract class CellEvent : MonoBehaviour
     }
     public CellType cellType = CellType.ON;
 
-    protected void Start()
+    protected virtual void Start()
     {
+        eventTaskManager = FindObjectOfType<EventTaskManager>();
+
         //タイルマップの位置調整
-        var cellPos = tilemap.WorldToCell(transform.position);
+        tilemap = FindObjectOfType<Tilemap>();
 
-        var complementPos = new Vector3(tilemap.cellSize.x / 2.0f, tilemap.cellSize.y / 2.0f, 0);
+        if (tilemap)
+        {
+            var cellPos = tilemap.WorldToCell(transform.position);
 
-        transform.position = tilemap.CellToWorld(cellPos) + complementPos;
+            var complementPos = new Vector3(tilemap.cellSize.x / 2.0f, tilemap.cellSize.y / 2.0f, 0);
+
+            transform.position = tilemap.CellToWorld(cellPos) + complementPos;
+        }
     }
 
     public abstract void CallEvent();

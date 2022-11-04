@@ -64,17 +64,17 @@ public class YushaController : CharaController
 
         //動けないなら終わり
         if (!canMove)
+        {
             return;
+        }
+        //else
+        //{
+        //    Debug.Log("");
+        //}
 
         //動いていないなら
         if (!isMoving)
         {
-            //どのキーも押していないなら
-            if (!Input.GetKey(KeyCode.W) && !Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.S) && !Input.GetKey(KeyCode.D))
-            {
-                //クリア
-                keys.Clear();
-            }
             //キーがないなら
             if (keys.Count == 0)
             {
@@ -99,14 +99,11 @@ public class YushaController : CharaController
         //動いているなら
         else
         {
-            //距離があるなら
-            if (Vector2.Distance(targetPos, transform.position) > Mathf.Epsilon)
-            {
-                //移動
-                transform.position = Vector3.MoveTowards(transform.position, targetPos, speed * Time.deltaTime);
-            }
+            //移動
+            transform.position = Vector3.MoveTowards(transform.position, targetPos, speed * Time.deltaTime);
+
             //たどり着いたら
-            else
+            if(Vector2.Distance(targetPos, transform.position) < Mathf.Epsilon)
             {
                 //false
                 isMoving = false;
@@ -121,6 +118,7 @@ public class YushaController : CharaController
                     {
                         //イベントを呼ぶ
                         cellEvent.CallEvent();
+                        Debug.Log("Call Event: " + targetPos);
                     }
                 }
             }
