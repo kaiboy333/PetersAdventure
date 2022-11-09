@@ -11,11 +11,13 @@ public class PlayerCamera : MonoBehaviour
     public float outViewLine = 0.25f;
 
     // Start is called before the first frame update
+
     void Start()
     {
         if (charaController)
         {
             targetObj = charaController.gameObject;
+            transform.position = new Vector3(targetObj.transform.position.x, targetObj.transform.position.y, -10);
             beforeTargetPos = targetObj.transform.position;
         }
     }

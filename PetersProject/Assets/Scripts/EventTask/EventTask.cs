@@ -7,14 +7,14 @@ public abstract class EventTask
     //TaskManagerはここで毎回呼び出す
     public void UpdateEvent()
     {
-        if (IsFinished)
+        if (isFinished)
             return;
 
         //終わったら
         if (Event())
         {
             //trueに
-            IsFinished = true;
+            isFinished = true;
         }
     }
 
@@ -22,5 +22,5 @@ public abstract class EventTask
     protected abstract bool Event();
 
     //終わったか
-    public bool IsFinished { get; private set; }
+    public bool isFinished { get; set; }
 }

@@ -11,7 +11,7 @@ public class AlphaManager : EventTask
     private readonly int firstAlpha, lastAlpha;
 
     //掛ける時間
-    [SerializeField] private float seconds = 2f;
+    [SerializeField] private float seconds = 1f;
 
     public AlphaManager(Image image, bool isBrighter)
     {

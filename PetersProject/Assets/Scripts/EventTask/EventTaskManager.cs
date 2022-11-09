@@ -23,7 +23,7 @@ public class EventTaskManager : MonoBehaviour
             //タスクのイベントを行う
             nowtask.UpdateEvent();
             //終わったなら
-            if (nowtask.IsFinished)
+            if (nowtask.isFinished)
             {
                 nowtask = null;
             }

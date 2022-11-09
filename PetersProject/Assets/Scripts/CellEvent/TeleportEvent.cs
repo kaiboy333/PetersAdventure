@@ -8,18 +8,16 @@ public class TeleportEvent : CellEvent
 {
     //飛ぶシーンの名前
     [SerializeField] private string sceneName;
-    //パネルのタグ名
-    [SerializeField] private string panelTag = "BlackPanel";
     //使うパネル
-    private Image panelImage;
+    [SerializeField] private Image panelImage;
     //プレイヤーのScript
     private YushaController yushaController;
+    //飛んだ先の位置
+    [SerializeField] private Vector2 teleportPosition;
 
     protected override void Start()
     {
         base.Start();
-
-        panelImage = GameObject.FindWithTag(panelTag).GetComponent<Image>();
 
         yushaController = FindObjectOfType<YushaController>();
     }
@@ -29,13 +27,18 @@ public class TeleportEvent : CellEvent
         //タスクマネージャーがあるなら
         if (eventTaskManager && panelImage && yushaController)
         {
-            //動けなくする
-            eventTaskManager.PushTask(new DoNowTask(() => { yushaController.canMove = false; }));
-            //yushaController.canMove = false;
-            //暗くする
-            eventTaskManager.PushTask(new AlphaManager(panelImage, false));
-            //シーン移動
-            eventTaskManager.PushTask(new DoNowTask(() => { SceneManager.LoadScene(sceneName); }));
+            //タスクマネージャーが動いていないなら
+            if (!eventTaskManager.IsWorking)
+            {
+                //動けなくする
+                eventTaskManager.PushTask(new DoNowTask(() => { yushaController.canMove = false; }));
+                //指定位置に移動するように設定
+                eventTaskManager.PushTask(new DoNowTask(() => { YushaController.firstPos = teleportPosition; }));
+                //暗くする
+                eventTaskManager.PushTask(new AlphaManager(panelImage, false));
+                //シーン移動
+                eventTaskManager.PushTask(new DoNowTask(() => { SceneManager.LoadScene(sceneName); }));
+            }
         }
     }
 }
