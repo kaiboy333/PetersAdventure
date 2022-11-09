@@ -6,27 +6,33 @@ using UnityEngine.UI;
 public class LogManager : MonoBehaviour
 {
     [SerializeField] private Text text;
+    [SerializeField] private RectTransform viewRectTransform;
+    [SerializeField] private RectTransform contentRectTransform;
+    private Vector2 firstContentPos;
     //str全部
     private string[] strs;
 
     //一度に表示できる列
     private const int PRINT_MAX_ROW = 3;
+    private float moveScrollVal = 0;
     
-    //通常版
-    private const float NORMAL_PRINT_INTERVAL = 0.5f;
-    //高速版
-    private const float FAST_PRINT_INTERVAL = 0.1f;
     //一文字表示するのに空ける時間
-    private float printInterval = NORMAL_PRINT_INTERVAL;
+    private float printInterval = 0.05f;
+    //高速にするか
+    private bool isFastPrint = false;
 
     private bool isPrinting = false;
     private bool isLastPrint = false;
+
+    //private bool isMoving = false;
 
     //今表示している一番上の列
     private int row = 0;
 
     //使用するLogEvent
     private LogEvent logEvent = null;
+
+    private const float MOVE_SPEED = 400;
 
     // Start is called before the first frame update
     void Start()
@@ -38,6 +44,17 @@ public class LogManager : MonoBehaviour
         {
             //文字列リセット
             text.text = "";
+        }
+
+        if (viewRectTransform)
+        {
+            //縦幅取得
+            moveScrollVal = viewRectTransform.sizeDelta.y;
+        }
+        if (contentRectTransform)
+        {
+            //Contentの初期位置記憶
+            firstContentPos = contentRectTransform.anchoredPosition;
         }
     }
 
@@ -70,6 +87,9 @@ public class LogManager : MonoBehaviour
                     //列を表示分ずらす
                     row += PRINT_MAX_ROW;
 
+                    //スクロールを行う
+                    StartCoroutine(Scroll());
+
                     //表示
                     StartCoroutine(PrintStr());
                 }
@@ -78,7 +98,8 @@ public class LogManager : MonoBehaviour
             else
             {
                 //表示を高速にする
-                printInterval = FAST_PRINT_INTERVAL;
+                //printInterval = FAST_PRINT_INTERVAL;
+                isFastPrint = true;
             }
         }
     }
@@ -91,6 +112,7 @@ public class LogManager : MonoBehaviour
         row = 0;
         isPrinting = false;
         isLastPrint = false;
+        contentRectTransform.anchoredPosition = firstContentPos;
 
         //改行で分ける
         strs = logEvent.Str.Split('\n');
@@ -122,7 +144,7 @@ public class LogManager : MonoBehaviour
         //指定列から表示列分を足す
         for(var i = 0; i < printRow; i++)
         {
-            str += strs[row + i];
+            str += strs[row + i] + '\n';
         }
 
         isPrinting = true;
@@ -130,10 +152,31 @@ public class LogManager : MonoBehaviour
         for(var i = 0; i < str.Length; i++)
         {
             text.text += str[i];
-            yield return new WaitForSeconds(printInterval);
+            if (!isFastPrint)
+            {
+                //改行かつ、最後の改行ではないなら
+                if (str[i] == '\n' && i != str.Length - 1)
+                {
+                    //少し待つ
+                    yield return new WaitForSeconds(0.3f);
+                }
+                //ほんの少し待つ
+                yield return new WaitForSeconds(printInterval);
+            }
         }
-        //速度を通常に
-        printInterval = NORMAL_PRINT_INTERVAL;
         isPrinting = false;
+
+        //速度を通常に
+        isFastPrint = false;
+    }
+
+    IEnumerator Scroll()
+    {
+        var targetPos = contentRectTransform.anchoredPosition + Vector2.up * moveScrollVal;
+        while (Vector2.Distance(targetPos, contentRectTransform.anchoredPosition) > Mathf.Epsilon)
+        {
+            contentRectTransform.anchoredPosition = Vector2.MoveTowards(contentRectTransform.anchoredPosition, targetPos, MOVE_SPEED * Time.deltaTime);
+            yield return null;
+        }
     }
 }

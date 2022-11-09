@@ -4,27 +4,20 @@ using UnityEngine;
 
 public class YushaController : CharaController
 {
-    private Animator animator = null;
-
-    private bool isMoving = false;
-
     private readonly List<Key> keys = new List<Key>();
-
-    private Vector2 targetPos;
 
     //現れる位置
     public static Vector2 firstPos;
 
+    //向いている方向
+    private Vector2 direction;
+
     // Start is called before the first frame update
     protected override void Start()
     {
-        animator = GetComponent<Animator>();
-        boxCollider2D = GetComponent<BoxCollider2D>();
 
         //初期位置に移動
         transform.position = firstPos;
-        //目標位置初期化
-        targetPos = transform.position;
 
         //タイルによる位置修正
         base.Start();
@@ -33,8 +26,6 @@ public class YushaController : CharaController
     // Update is called once per frame
     protected void Update()
     {
-        //base.Update();
-
         if (Input.GetKeyDown(KeyCode.D))
         {
             keys.Add(Key.RIGHT);
@@ -69,62 +60,74 @@ public class YushaController : CharaController
             keys.Remove(Key.DOWN);
         }
 
-        if (!canMove)
+        if(keys.Count > 0)
         {
-            //Debug.Log("Can't Move");
-            return;
+            key = keys[keys.Count - 1];
+            //向いている向きを記憶
+            direction = directions[(int)key];
         }
-
-        //動いていないなら
-        if (!isMoving)
-        {
-            //キーがないなら
-            if (keys.Count == 0)
-            {
-                //終わり
-                return;
-            }
-
-            //最後に押しているキーを見て移動
-            var direction = directions[(int)keys[keys.Count - 1]];
-            targetPos = (Vector2)transform.position + direction * moveDistance;
-            //歩けるなら
-            if (CanWalk(targetPos))
-            {
-                //trueに
-                isMoving = true;
-            }
-
-            //アニメーション再生
-            animator.SetFloat("MoveX", direction.x);
-            animator.SetFloat("MoveY", direction.y);
-        }
-        //動いているなら
         else
         {
-            //移動
-            transform.position = Vector3.MoveTowards(transform.position, targetPos, speed * Time.deltaTime);
+            key = Key.NONE;
+        }
 
-            //たどり着いたら
-            if(Vector2.Distance(targetPos, transform.position) < Mathf.Epsilon)
-            {
-                //false
-                isMoving = false;
+        //イベント発生中は何もできない
+        if (!CanMove)
+            return;
 
-                //CellEventを取得
-                var cellEvent = GetCellEvent(targetPos);
+        Move();
+
+        //動いていないときに
+        if (!isMoving)
+        {
+            //スペースキーを押したら
+            if(Input.GetKeyDown(KeyCode.Space)) {
+                //CellEventを取得(Checkタイプ)
+                var cellEvent = GetCellEvent(GetNextTargetPos(direction), CellEvent.CellType.Check);
                 //CellEventがあるなら
                 if (cellEvent)
                 {
-                    //CellEventのタイプが乗るタイプなら
-                    if (cellEvent.cellType == CellEvent.CellType.ON)
+                    //イベントを呼ぶ
+                    cellEvent.CallEvent();
+                }
+            }
+        }
+    }
+
+    private CellEvent GetCellEvent(Vector2 targetPos, CellEvent.CellType cellType)
+    {
+        var hitColliders = Physics2D.OverlapCircleAll(targetPos, moveDistance / 4.0f, cellMask);
+
+        foreach (var hitCollider in hitColliders)
+        {
+            //当たったコライダーが自分のとは違うものなら
+            if (hitCollider.gameObject != this.gameObject)
+            {
+                //CellEventを取得(Onタイプ)
+                var cellEvent = hitCollider.gameObject.GetComponent<CellEvent>();
+                if (cellEvent)
+                {
+                    //CellTypeが一致したら
+                    if(cellEvent.cellType == cellType)
                     {
-                        //イベントを呼ぶ
-                        cellEvent.CallEvent();
-                        Debug.Log("Call Event: " + targetPos);
+                        return cellEvent;
                     }
                 }
             }
+        }
+
+        return null;
+    }
+
+    protected override void ArriveTargetPos()
+    {
+        //CellEventを取得
+        var cellEvent = GetCellEvent(targetPos, CellEvent.CellType.ON);
+        //CellEventがあるなら
+        if (cellEvent)
+        {
+            //イベントを呼ぶ
+            cellEvent.CallEvent();
         }
     }
 
@@ -132,8 +135,8 @@ public class YushaController : CharaController
     {
         if (boxCollider2D)
         {
-            Gizmos.color = Color.blue;
-            Gizmos.DrawSphere(targetPos, moveDistance / 4.0f);
+            Gizmos.color = Color.yellow;
+            Gizmos.DrawSphere(GetNextTargetPos(direction), sphereRadious);
         }
     }
 }

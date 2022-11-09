@@ -10,8 +10,8 @@ public class TeleportEvent : CellEvent
     [SerializeField] private string sceneName;
     //使うパネル
     [SerializeField] private Image panelImage;
-    //プレイヤーのScript
-    private YushaController yushaController;
+    ////プレイヤーのScript
+    //private YushaController yushaController;
     //飛んだ先の位置
     [SerializeField] private Vector2 teleportPosition;
 
@@ -19,19 +19,17 @@ public class TeleportEvent : CellEvent
     {
         base.Start();
 
-        yushaController = FindObjectOfType<YushaController>();
+        //yushaController = FindObjectOfType<YushaController>();
     }
 
     public override void CallEvent()
     {
         //タスクマネージャーがあるなら
-        if (eventTaskManager && panelImage && yushaController)
+        if (eventTaskManager && panelImage)
         {
             //タスクマネージャーが動いていないなら
             if (!eventTaskManager.IsWorking)
             {
-                //動けなくする
-                eventTaskManager.PushTask(new DoNowTask(() => { yushaController.canMove = false; }));
                 //指定位置に移動するように設定
                 eventTaskManager.PushTask(new DoNowTask(() => { YushaController.firstPos = teleportPosition; }));
                 //暗くする
